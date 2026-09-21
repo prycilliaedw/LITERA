@@ -1,0 +1,72 @@
+# ============================================================
+# Stage 1: Install PHP dependencies
+# ============================================================
+FROM composer:2 AS vendor
+
+WORKDIR /app
+
+COPY composer.json composer.lock ./
+
+RUN composer install \
+    --no-dev \
+    --no-interaction \
+    --prefer-dist \
+    --optimize-autoloader
+
+
+# ============================================================
+# Stage 2: Build frontend assets
+# ============================================================
+FROM node:24-bookworm AS frontend
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+
+RUN npm ci
+
+# Flux CSS is imported from vendor/
+COPY --from=vendor /app/vendor ./vendor
+
+COPY resources ./resources
+COPY public ./public
+COPY vite.config.js ./
+
+RUN npm run build
+
+
+# ============================================================
+# Stage 3: Laravel runtime with FrankenPHP
+# ============================================================
+FROM dunglas/frankenphp:php8.4-bookworm
+
+WORKDIR /app
+
+RUN install-php-extensions \
+    pdo_mysql \
+    mbstring \
+    xml \
+    curl \
+    fileinfo \
+    opcache
+
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+COPY . .
+
+COPY --from=vendor /app/vendor ./vendor
+
+COPY --from=frontend /app/public/build ./public/build
+
+RUN mkdir -p \
+    storage/framework/cache \
+    storage/framework/sessions \
+    storage/framework/views \
+    storage/logs \
+    bootstrap/cache
+
+RUN chmod -R 775 storage bootstrap/cache
+
+RUN php artisan optimize:clear
+
+CMD ["frankenphp", "php-server", "--root", "/app/public"]
