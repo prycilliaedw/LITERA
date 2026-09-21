@@ -59,6 +59,8 @@ RUN install-php-extensions \
 
 COPY . .
 
+RUN rm -f bootstrap/cache/*.php
+
 COPY --from=vendor /app/vendor ./vendor
 
 COPY --from=frontend /app/public/build ./public/build
