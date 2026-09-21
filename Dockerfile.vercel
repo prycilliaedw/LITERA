@@ -1,6 +1,13 @@
 # ============================================================
-# Stage 1: Install PHP dependencies
+# LITERA - Vercel Container Deployment
 # ============================================================
+
+# ------------------------------------------------------------
+# Stage 1: Install PHP dependencies
+# IMPORTANT: do not run Composer scripts here because the
+# Laravel application files (including artisan) are not copied
+# into this stage yet.
+# ------------------------------------------------------------
 FROM composer:2 AS vendor
 
 WORKDIR /app
@@ -11,21 +18,21 @@ RUN composer install \
     --no-dev \
     --no-interaction \
     --prefer-dist \
-    --optimize-autoloader
+    --optimize-autoloader \
+    --no-scripts
 
 
-# ============================================================
+# ------------------------------------------------------------
 # Stage 2: Build frontend assets
-# ============================================================
+# Flux CSS is inside vendor/livewire/flux.
+# ------------------------------------------------------------
 FROM node:24-bookworm AS frontend
 
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-
 RUN npm ci
 
-# Flux CSS is imported from vendor/
 COPY --from=vendor /app/vendor ./vendor
 
 COPY resources ./resources
@@ -35,9 +42,9 @@ COPY vite.config.js ./
 RUN npm run build
 
 
-# ============================================================
-# Stage 3: Laravel runtime with FrankenPHP
-# ============================================================
+# ------------------------------------------------------------
+# Stage 3: Laravel runtime
+# ------------------------------------------------------------
 FROM dunglas/frankenphp:php8.4-bookworm
 
 WORKDIR /app
@@ -49,8 +56,6 @@ RUN install-php-extensions \
     curl \
     fileinfo \
     opcache
-
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 COPY . .
 
@@ -67,6 +72,9 @@ RUN mkdir -p \
 
 RUN chmod -R 775 storage bootstrap/cache
 
-RUN php artisan optimize:clear
+# Composer scripts were intentionally skipped in the vendor stage
+# because artisan was not available there. Run package discovery
+# now that the full Laravel application is present.
+RUN php artisan package:discover --ansi
 
 CMD ["frankenphp", "php-server", "--root", "/app/public"]
