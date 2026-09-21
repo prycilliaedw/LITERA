@@ -31,7 +31,7 @@ FROM node:24-bookworm AS frontend
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-RUN npm ci
+RUN npm install
 
 COPY --from=vendor /app/vendor ./vendor
 
