@@ -75,6 +75,13 @@ RUN chmod -R 775 storage bootstrap/cache
 # Composer scripts were intentionally skipped in the vendor stage
 # because artisan was not available there. Run package discovery
 # now that the full Laravel application is present.
-RUN php artisan package:discover --ansi
+RUN mkdir -p \
+    storage/framework/cache \
+    storage/framework/sessions \
+    storage/framework/views \
+    storage/logs \
+    bootstrap/cache
+
+RUN chmod -R 775 storage bootstrap/cache
 
 CMD ["frankenphp", "php-server", "--root", "/app/public"]
