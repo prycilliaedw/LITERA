@@ -1,0 +1,103 @@
+{
+    "home": "Home",
+    "analyze": "Analyze",
+    "history": "History",
+    "about": "About",
+    "get_started": "Get Started",
+    "login": "Log in",
+    "dashboard": "Dashboard",
+
+    "safer_digital_society": "A Safer Digital Society",
+
+    "hero_1": "Understand",
+    "hero_2": "before you",
+    "hero_3": "believe.",
+
+    "hero_description": "LITERA helps you analyze digital content from text, links, videos, and audio, so you can make smarter decisions in an information-saturated world.",
+
+    "analyze_content": "Analyze Content",
+    "learn_how": "Learn how it works",
+
+    "content_types_supported": "Content Types Supported",
+    "ai_analysis": "AI-Powered Analysis",
+    "trusted_sources": "Trusted Evidence Sources",
+    "informed_indonesia": "A More Informed Digital Indonesia",
+
+    "check_more": "Check more than text",
+    "support_multiple": "Support Multiple Content Types",
+
+    "multiple_description": "From viral posts to voice notes, LITERA helps you analyze and verify information across different formats.",
+
+    "text": "Text",
+    "link": "Link",
+    "video": "Video",
+    "audio": "Audio",
+
+    "text_description": "Paste or type any text content",
+    "link_description": "Analyze content from any URL",
+    "video_description": "Upload video file (mp4, mov, etc.)",
+    "audio_description": "Upload audio file (mp3, wav, etc.)",
+
+    "about_meta": "Learn about LITERA, its human-centered AI approach, analysis workflow, and technologies supporting digital content verification.",
+
+    "about_label": "About LITERA",
+    "about_title_1": "Technology to",
+    "about_title_2": "understand information.",
+    "about_intro": "LITERA is designed to help people understand digital information by combining AI-powered analysis and available evidence checking in one understandable workflow.",
+    "about_quote": "AI helps analyze. People still decide what to believe.",
+
+    "human_centered_label": "Human-Centered AI",
+    "human_title": "AI helps you understand.",
+    "human_title_2": "You still decide what to believe.",
+    "human_description_1": "LITERA keeps people at the center of the decision-making process. The system helps identify patterns, understand language, surface claims, and examine available evidence.",
+    "human_description_2": "This approach positions AI as a reasoning aid rather than a replacement for human judgment.",
+
+    "how_litera_works": "How LITERA Works",
+    "how_title": "From content to understanding.",
+    "how_description": "Content in different formats passes through extraction, analysis, and verification before the result is presented to the user.",
+
+    "input": "Input",
+    "extract": "Extract",
+    "analyze_step": "Analyze",
+    "verify": "Verify",
+    "understand": "Understand",
+
+    "input_description": "Submit text, a link, or upload a video or audio file.",
+    "extract_description": "Content is extracted and audio or video is transcribed into text.",
+    "analyze_description": "Language and content intent are analyzed using NLP and IndoBERT.",
+    "verify_description": "Claims are checked against available fact-checking information.",
+    "understand_description": "Analysis results, claims, evidence, status, and recommendations are presented to the user.",
+
+    "technology_label": "Technology",
+    "technology_title": "Behind LITERA.",
+    "technology_description": "Several components work together to transform different forms of digital content into understandable analysis results.",
+
+    "whisper_description": "Used to help transcribe audio and video content into text that can be analyzed.",
+    "indobert_description": "Used for language analysis and content intent classification.",
+    "factcheck_description": "Used to retrieve and compare available fact-checking information related to claims.",
+    "fastapi_description": "Acts as the processing backend connecting the analysis workflow and AI components.",
+
+    "project_label": "Innovation Identity",
+    "project_title": "LITERA (Literacy Intelligence for Trusted and Ethical Reasoning Analysis)",
+    "project_description": "A Human-Centered Artificial Intelligence-based content verification innovation toward an ethical and sustainable digital ecosystem.",
+
+    "cta_small": "Think. Check. Share Smarter.",
+    "cta_title": "Better information starts with a check.",
+    "about_cta_title": "Start understanding information more critically.",
+
+    "footer_description": "A digital content analysis platform that helps you understand information before trusting or sharing it.",
+    "footer_product": "Product",
+    "footer_information": "Information",
+    "footer_contact": "Contact",
+
+    "privacy": "Privacy",
+    "terms": "Terms",
+
+    "contact_description": "Have a question, feedback, or want to learn more about LITERA?",
+    "contact_placeholder": "Contact LITERA Team",
+
+    "footer_rights": "All rights reserved.",
+    "footer_tagline": "Think. Check. Share Smarter.",
+    "ai_side": "AI",
+    "human_side": "Human"
+}

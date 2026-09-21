@@ -1,0 +1,104 @@
+{
+    "home": "Beranda",
+    "analyze": "Analisis",
+    "history": "Riwayat",
+    "about": "Tentang",
+    "get_started": "Mulai",
+    "login": "Masuk",
+    "dashboard": "Dashboard",
+
+    "safer_digital_society": "Masyarakat Digital yang Lebih Aman",
+
+    "hero_1": "Pahami",
+    "hero_2": "sebelum kamu",
+    "hero_3": "percaya.",
+
+    "hero_description": "LITERA membantu menganalisis konten digital dari teks, tautan, video, dan audio agar kamu dapat mengambil keputusan yang lebih bijak di tengah banjir informasi.",
+
+    "analyze_content": "Analisis Konten",
+    "learn_how": "Lihat cara kerjanya",
+
+    "content_types_supported": "Jenis Konten Didukung",
+    "ai_analysis": "Analisis Berbasis AI",
+    "trusted_sources": "Sumber Bukti Tepercaya",
+    "informed_indonesia": "Indonesia Digital yang Lebih Terinformasi",
+
+    "check_more": "Cek lebih dari sekadar teks",
+    "support_multiple": "Dukung Berbagai Jenis Konten",
+
+    "multiple_description": "Dari unggahan viral hingga pesan suara, LITERA membantu menganalisis dan memverifikasi informasi dalam berbagai format.",
+
+    "text": "Teks",
+    "link": "Tautan",
+    "video": "Video",
+    "audio": "Audio",
+
+    "text_description": "Tempel atau ketik konten teks",
+    "link_description": "Analisis konten dari URL",
+    "video_description": "Unggah file video (mp4, mov, dll.)",
+    "audio_description": "Unggah file audio (mp3, wav, dll.)",
+
+    "about_meta": "Mengenal LITERA, pendekatan human-centered AI, alur analisis, dan teknologi yang mendukung verifikasi konten digital.",
+
+    "about_label": "Tentang LITERA",
+    "about_title_1": "Teknologi untuk",
+    "about_title_2": "memahami informasi.",
+    "about_intro": "LITERA dirancang untuk membantu manusia memahami informasi digital dengan menggabungkan analisis berbasis AI dan pemeriksaan bukti dalam satu alur yang mudah dipahami.",
+    "about_quote": "AI membantu menganalisis. Manusia tetap menentukan apa yang dipercaya.",
+
+    "human_centered_label": "Human-Centered AI",
+    "human_title": "AI membantu kamu memahami.",
+    "human_title_2": "Kamu tetap menentukan apa yang dipercaya.",
+    "human_description_1": "LITERA menempatkan manusia sebagai pengambil keputusan akhir. Sistem membantu membaca pola, memahami bahasa, menemukan klaim, dan memeriksa bukti yang tersedia.",
+    "human_description_2": "Pendekatan ini menjadikan AI sebagai alat bantu penalaran, bukan pengganti penilaian manusia.",
+
+    "how_litera_works": "Cara LITERA Bekerja",
+    "how_title": "Dari konten menuju pemahaman.",
+    "how_description": "Konten dalam berbagai format melewati tahapan ekstraksi, analisis, dan verifikasi sebelum hasil disajikan kepada pengguna.",
+
+    "input": "Masukan",
+    "extract": "Ekstraksi",
+    "analyze_step": "Analisis",
+    "verify": "Verifikasi",
+    "understand": "Pemahaman",
+
+    "input_description": "Masukkan teks, tautan, atau unggah video maupun audio.",
+    "extract_description": "Konten diekstrak dan audio atau video ditranskripsi menjadi teks.",
+    "analyze_description": "Bahasa dan intensi konten dianalisis menggunakan NLP dan IndoBERT.",
+    "verify_description": "Klaim diperiksa menggunakan informasi fact-checking yang tersedia.",
+    "understand_description": "Hasil analisis, klaim, bukti, status, dan rekomendasi disajikan kepada pengguna.",
+
+    "technology_label": "Teknologi",
+    "technology_title": "Di balik LITERA.",
+    "technology_description": "Beberapa komponen bekerja bersama untuk mengubah berbagai bentuk konten digital menjadi hasil analisis yang dapat dipahami.",
+
+    "whisper_description": "Digunakan untuk membantu mentranskripsi konten audio dan video menjadi teks yang dapat dianalisis.",
+    "indobert_description": "Digunakan dalam analisis bahasa dan klasifikasi intensi konten.",
+    "factcheck_description": "Digunakan untuk mencari dan membandingkan informasi fact-checking yang tersedia terkait klaim.",
+    "fastapi_description": "Menjadi backend pemrosesan yang menghubungkan alur analisis dan komponen AI.",
+
+    "project_label": "Identitas Inovasi",
+    "project_title": "LITERA (Literacy Intelligence for Trusted and Ethical Reasoning Analysis)",
+    "project_description": "Inovasi verifikasi konten berbasis Human-Centered Artificial Intelligence menuju ekosistem digital yang etis dan berkelanjutan.",
+
+    "cta_small": "Pikirkan. Cek. Bagikan Lebih Bijak.",
+    "cta_title": "Informasi yang lebih baik dimulai dari satu pengecekan.",
+    "about_cta_title": "Mulai memahami informasi dengan lebih kritis.",
+
+    "footer_description": "Platform analisis konten digital yang membantu kamu memahami informasi sebelum mempercayai atau membagikannya.",
+    "footer_product": "Produk",
+    "footer_information": "Informasi",
+    "footer_contact": "Kontak",
+
+    "privacy": "Privasi",
+    "terms": "Ketentuan",
+
+    "contact_description": "Punya pertanyaan, masukan, atau ingin mengenal LITERA lebih jauh?",
+    "contact_placeholder": "Kontak tim LITERA",
+
+    "footer_rights": "Seluruh hak dilindungi.",
+    "footer_tagline": "Pikirkan. Cek. Bagikan Lebih Bijak.",
+    "ai_side": "AI",
+    "human_side": "Manusia"
+
+}
