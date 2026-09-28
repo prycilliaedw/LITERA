@@ -9,9 +9,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        LITERA — {{ __('hero_1') }} {{ __('hero_3') }}
-    </title>
+    <title>LITERA</title>
 
     <meta
         name="description"
@@ -96,14 +94,14 @@
         }
 
         .hero-title {
-            font-size: clamp(54px, 4.55vw, 84px);
-            line-height: .82;
+            font-size: clamp(38px, 4vw, 62px);
+            line-height: .95;
         }
 
         .hero-description {
             max-width: 500px;
-            font-size: clamp(13px, .78vw, 15px);
-            line-height: 1.8;
+            font-size: 16px;
+            line-height: 1.65;
         }
 
         .hero-art {
@@ -217,6 +215,84 @@
             padding: 17px 0;
             border-bottom: 1px solid rgba(17, 17, 17, .10);
         }
+
+        .home-analysis-card {
+            max-width: 620px;
+            margin-top: 26px;
+            padding: 20px;
+            border: 1px solid rgba(17, 17, 17, .10);
+            border-radius: 26px;
+            background: #fff;
+        }
+
+        .home-analysis-tabs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .home-analysis-tab {
+            min-height: 44px;
+            border: 0;
+            border-radius: 999px;
+            background: var(--litera-cream);
+            color: var(--litera-black);
+            font: inherit;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .home-analysis-tab[aria-pressed="true"] {
+            background: var(--litera-black);
+            color: #fff;
+        }
+
+        .home-analysis-input {
+            display: block;
+            width: 100%;
+            min-height: 92px;
+            padding: 14px;
+            border: 1px solid rgba(17, 17, 17, .14);
+            border-radius: 18px;
+            background: #fdfdfc;
+            color: var(--litera-black);
+            font: inherit;
+            font-size: 15px;
+            line-height: 1.5;
+            resize: vertical;
+        }
+
+        .home-analysis-submit {
+            width: 100%;
+            min-height: 50px;
+            margin-top: 12px;
+            border: 0;
+            border-radius: 999px;
+            background: var(--litera-red);
+            color: #fff;
+            font: inherit;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .home-learn-link {
+            display: inline-block;
+            margin-top: 14px;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .content-label { font-size: 13px; letter-spacing: .08em; }
+        .content-heading { margin-top: 16px; font-size: clamp(30px, 3vw, 42px); line-height: 1.05; }
+        .content-description, .signal-description, .human-copy, .human-note { font-size: 15px; line-height: 1.65; }
+        .signal-row { grid-template-columns: 36px 1fr 8px; gap: 16px; padding: 18px 0; }
+        .signal-name { font-size: 17px; }
+        .signal-description { color: rgba(17, 17, 17, .62); }
+        .human-label { font-size: 13px; }
+        .cta-button { font-size: 16px; }
 
         .signal-number {
             color: rgba(17, 17, 17, .28);
@@ -466,11 +542,23 @@
             }
         }
 
-        @media (max-width: 500px) {
+        .hero-title { font-size: clamp(38px, 4vw, 62px); line-height: .98; }
+        .hero-features { display: none; }
+        .signal-row:nth-child(n + 4) { display: none; }
+        .signal-description { font-size: 15px; }
+        .signal-name { font-size: 16px; }
 
-            .signal-description {
-                display: none;
-            }
+        @media (max-width: 767px) {
+            .hero-title { font-size: clamp(34px, 10vw, 44px); }
+            .hero-description { font-size: 15px; }
+        }
+
+        @media (max-width: 1023px) {
+            body { padding-bottom: 82px; }
+            .hero-grid { grid-template-columns: minmax(0, 1fr); }
+        }
+
+        @media (max-width: 500px) {
 
             .signal-row {
                 padding: 14px 0;
@@ -504,21 +592,6 @@
                     {{-- LEFT --}}
                     <div class="hero-copy relative z-10">
 
-                        <div class="mb-6 flex items-start gap-3">
-
-                            <span
-                                class="mt-1 w-9 border-t border-black/60"
-                            ></span>
-
-                            <span
-                                class="max-w-60 text-[10px] font-semibold uppercase leading-5 tracking-[0.20em] text-black/65 sm:text-[11px]"
-                            >
-                                {{ __('safer_digital_society') }}
-                            </span>
-
-                        </div>
-
-
                         <h1 class="litera-display hero-title max-w-162.5">
 
                             <span class="block">
@@ -536,108 +609,28 @@
                         </h1>
 
 
-                        <p class="hero-description mt-7 text-black/55">
-                            {{ __('hero_description') }}
+                        <p class="hero-description mt-5 text-black/55">
+                            {{ app()->isLocale('id')
+                                ? 'Periksa informasi sebelum percaya atau membagikannya.'
+                                : 'Check information before you trust or share it.' }}
                         </p>
 
 
-                        <div class="mt-7 flex flex-wrap items-center gap-4">
-
-                            <a
-                                href="{{ route('analyze') }}"
-                                class="red-button inline-flex items-center rounded-[14px] px-6 py-4 text-[13px] font-bold text-white"
-                            >
-                                {{ __('analyze_content') }}
-                            </a>
-
-
-                            <a
-                                href="{{ route('about') }}"
-                                class="group inline-flex items-center gap-3 text-[13px] font-semibold"
-                            >
-
-                                <span
-                                    class="flex h-10 w-10 items-center justify-center rounded-full bg-black text-white transition group-hover:scale-105"
-                                >
-
-                                    <svg
-                                        width="12"
-                                        height="12"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                    >
-                                        <path
-                                            d="M9 6L17 12L9 18V6Z"
-                                            fill="currentColor"
-                                        />
-                                    </svg>
-
-                                </span>
-
-                                {{ __('learn_how') }}
-
-                            </a>
-
-                        </div>
-
-
-                        {{-- FOUR CORE CAPABILITIES --}}
-                        <div class="hero-features">
-
-                            <div class="hero-feature">
-
-                                <div class="hero-feature-number">
-                                    01
-                                </div>
-
-                                <div class="hero-feature-name">
-                                    One-Link Check
-                                </div>
-
+                        <form id="homeAnalyzer" action="{{ route('analyze') }}" method="GET" class="home-analysis-card">
+                            <input type="hidden" id="homeContentType" name="type" value="text">
+                            <div class="home-analysis-tabs" role="group" aria-label="{{ app()->isLocale('id') ? 'Pilih jenis konten' : 'Choose content type' }}">
+                                <button class="home-analysis-tab" type="button" aria-pressed="true" data-home-mode="text">{{ app()->isLocale('id') ? 'Teks' : 'Text' }}</button>
+                                <button class="home-analysis-tab" type="button" aria-pressed="false" data-home-mode="video">Video</button>
+                                <button class="home-analysis-tab" type="button" aria-pressed="false" data-home-mode="audio">Audio</button>
                             </div>
+                            <label class="sr-only" for="homeContent">{{ app()->isLocale('id') ? 'Teks atau tautan konten' : 'Text or content link' }}</label>
+                            <textarea id="homeContent" class="home-analysis-input" placeholder="{{ app()->isLocale('id') ? 'Tempel tautan atau masukkan konten' : 'Paste a link or enter content' }}"></textarea>
+                            <button type="submit" class="home-analysis-submit">{{ __('analyze_content') }}</button>
+                        </form>
 
-
-                            <div class="hero-feature">
-
-                                <div class="hero-feature-number">
-                                    02
-                                </div>
-
-                                <div class="hero-feature-name">
-                                    FactLens
-                                </div>
-
-                            </div>
-
-
-                            <div class="hero-feature">
-
-                                <div class="hero-feature-number">
-                                    03
-                                </div>
-
-                                <div class="hero-feature-name">
-                                    IntentScope
-                                </div>
-
-                            </div>
-
-
-                            <div class="hero-feature">
-
-                                <div
-                                    class="hero-feature-number text-(--litera-red)"
-                                >
-                                    04
-                                </div>
-
-                                <div class="hero-feature-name">
-                                    LiteraReason
-                                </div>
-
-                            </div>
-
-                        </div>
+                        <a href="{{ route('about') }}#how-it-works" class="home-learn-link">
+                            {{ app()->isLocale('id') ? 'Lihat cara kerjanya' : 'See how it works' }}
+                        </a>
 
                     </div>
 
@@ -680,15 +673,15 @@
                         <div>
 
                             <div class="content-label">
-                                One-Link Check
+                                {{ app()->isLocale('id') ? 'Yang kami temukan' : 'What we found' }}
                             </div>
 
 
                             <h2 class="litera-display content-heading">
 
                                 {{ app()->isLocale('id')
-                                    ? 'Satu tautan. Lebih banyak pemahaman.'
-                                    : 'One link. Multiple signals.' }}
+                                    ? 'Pahami klaim, sumber, dan pilihan katanya.'
+                                    : 'Understand the claim, sources, and wording.' }}
 
                             </h2>
 
@@ -696,8 +689,8 @@
                             <p class="content-description">
 
                                 {{ app()->isLocale('id')
-                                    ? 'LITERA mengurai konten dari satu tautan untuk memahami bahasa, intensi, klaim, dan bukti yang tersedia.'
-                                    : 'LITERA extracts content from a single link to understand language, intent, claims, and available evidence.' }}
+                                    ? 'Lihat hal penting dalam konten tanpa istilah teknis.'
+                                    : 'See the important parts without technical terms.' }}
 
                             </p>
 
@@ -708,7 +701,7 @@
                         <div class="signal-list">
 
                             {{-- CONTENT --}}
-                            <div class="signal-row active">
+                        <div class="signal-row active">
 
                                 <div class="signal-number">
                                     01
@@ -717,14 +710,14 @@
                                 <div>
 
                                     <div class="signal-name">
-                                        Content
+                                        {{ app()->isLocale('id') ? 'Klaim utama' : 'Main claim' }}
                                     </div>
 
                                     <div class="signal-description">
 
                                         {{ app()->isLocale('id')
-                                            ? 'Konten dari tautan diekstraksi dan audio-visual dapat ditranskripsi.'
-                                            : 'Content is extracted from the link and audio-visual media can be transcribed.' }}
+                                            ? 'Pernyataan penting dalam konten ditampilkan.'
+                                            : 'Important statements in the content are surfaced.' }}
 
                                     </div>
 
@@ -745,14 +738,14 @@
                                 <div>
 
                                     <div class="signal-name">
-                                        Intent
+                                        {{ app()->isLocale('id') ? 'Sumber pendukung' : 'Supporting sources' }}
                                     </div>
 
                                     <div class="signal-description">
 
                                         {{ app()->isLocale('id')
-                                            ? 'Intensi pesan dianalisis untuk memahami maksud konten.'
-                                            : 'Message intent is analyzed to understand the purpose of the content.' }}
+                                            ? 'Rujukan yang tersedia membantu memberi konteks.'
+                                            : 'Available references add helpful context.' }}
 
                                     </div>
 
@@ -773,14 +766,14 @@
                                 <div>
 
                                     <div class="signal-name">
-                                        Claims
+                                        {{ app()->isLocale('id') ? 'Pola bahasa' : 'Language patterns' }}
                                     </div>
 
                                     <div class="signal-description">
 
                                         {{ app()->isLocale('id')
-                                            ? 'Klaim utama ditemukan untuk masuk ke proses fact-checking.'
-                                            : 'Main claims are identified for fact-checking.' }}
+                                            ? 'Pilihan kata yang perlu diperhatikan dijelaskan.'
+                                            : 'Wording that may need a closer look is explained.' }}
 
                                     </div>
 
@@ -898,7 +891,7 @@
                     <div>
 
                         <p class="human-label">
-                            Human-Centered AI
+                            {{ app()->isLocale('id') ? 'Keputusan tetap milikmu' : 'Your decision comes first' }}
                         </p>
 
 
@@ -927,19 +920,10 @@
                         <p class="human-copy">
 
                             {{ app()->isLocale('id')
-                                ? 'LITERA dirancang sebagai pendamping penilaian, bukan pengganti penilaian manusia. Sistem membantu membaca pola, menemukan klaim, memeriksa bukti, dan menjelaskan alasan di balik hasil.'
-                                : 'LITERA is designed as decision support, not a replacement for human judgment. The system helps identify patterns, surface claims, examine evidence, and explain the reasons behind the result.' }}
+                                ? 'LITERA membantu memeriksa informasi. Keputusan akhir tetap di tanganmu.'
+                                : 'LITERA helps you check information. The final decision is yours.' }}
 
                         </p>
-
-
-                        <div class="human-note">
-
-                            {{ app()->isLocale('id')
-                                ? 'Pahami konteksnya. Periksa buktinya. Tentukan sendiri.'
-                                : 'Understand the context. Check the evidence. Decide for yourself.' }}
-
-                        </div>
 
                     </div>
 
@@ -986,6 +970,27 @@
         SHARED FOOTER
     ========================================================== --}}
     <x-litera-footer />
+
+    <script>
+        document.querySelectorAll('[data-home-mode]').forEach(function (tab) {
+            tab.addEventListener('click', function () {
+                document.querySelectorAll('[data-home-mode]').forEach(function (item) {
+                    item.setAttribute('aria-pressed', item === tab ? 'true' : 'false');
+                });
+
+                document.getElementById('homeContentType').value = tab.dataset.homeMode;
+                document.getElementById('homeContent').placeholder = {
+                    text: @js(app()->isLocale('id') ? 'Tempel tautan atau masukkan konten' : 'Paste a link or enter content'),
+                    video: @js(app()->isLocale('id') ? 'Tempel tautan video di sini' : 'Paste a video link here'),
+                    audio: @js(app()->isLocale('id') ? 'Tempel tautan audio di sini' : 'Paste an audio link here'),
+                }[tab.dataset.homeMode];
+            });
+        });
+
+        document.getElementById('homeAnalyzer').addEventListener('submit', function () {
+            sessionStorage.setItem('litera-analysis-content', document.getElementById('homeContent').value);
+        });
+    </script>
 
 </body>
 
