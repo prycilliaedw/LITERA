@@ -1,193 +1,237 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ app()->isLocale('id') ? 'Analisis Konten' : 'Analyze Content' }} — LITERA</title>
     <meta name="description" content="{{ app()->isLocale('id') ? 'Periksa informasi sebelum percaya atau membagikannya.' : 'Check information before you trust or share it.' }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
     <style>
-        :root { --litera-red: #df252b; --litera-black: #111; --litera-cream: #f7f6f2; --litera-muted: #5d5b58; --litera-line: rgba(17, 17, 17, .12); }
+        :root { --litera-red: #df252b; --litera-black: #111; --litera-cream: #f7f6f2; --litera-muted: #5d5b58; --litera-line: rgba(17,17,17,.12); }
         * { box-sizing: border-box; }
         body { margin: 0; background: var(--litera-cream); color: var(--litera-black); font-family: "Manrope", "Inter", Arial, sans-serif; }
-        .analyze-page { width: calc(100% - 40px); max-width: 920px; margin: 0 auto; padding: 132px 0 88px; }
-        h1, h2, p { margin-top: 0; }
-        h1 { margin-bottom: 12px; font-size: clamp(34px, 4vw, 44px); line-height: 1.12; letter-spacing: -.04em; }
-        .page-intro { margin-bottom: 28px; color: var(--litera-muted); font-size: 16px; line-height: 1.6; }
-        .input-card, .result-card { border: 1px solid var(--litera-line); border-radius: 28px; background: #fff; }
-        .input-card { width: 100%; min-width: 0; padding: clamp(20px, 4vw, 36px); }
-        .mode-tabs { display: flex; min-width: 0; gap: 8px; margin-bottom: 20px; }
-        .mode-tab { min-width: 0; min-height: 46px; padding: 10px 22px; border: 1px solid var(--litera-line); border-radius: 999px; background: #fff; color: var(--litera-black); font: inherit; font-size: 15px; font-weight: 700; cursor: pointer; }
-        .mode-tab[aria-pressed="true"] { border-color: var(--litera-black); background: var(--litera-black); color: #fff; }
-        .content-input { display: block; width: 100%; max-width: 100%; min-width: 0; min-height: 142px; padding: 18px; border: 1px solid var(--litera-line); border-radius: 20px; background: #fdfdfc; color: var(--litera-black); font: inherit; font-size: 16px; line-height: 1.6; resize: vertical; }
-        .content-input::placeholder { color: #77736e; }
-        .analyze-submit, .share-button { display: inline-flex; min-height: 50px; align-items: center; justify-content: center; padding: 12px 24px; border: 0; border-radius: 999px; font: inherit; font-size: 16px; font-weight: 800; cursor: pointer; }
-        .analyze-submit { margin-top: 18px; background: var(--litera-red); color: #fff; }
-        .analyze-submit:disabled { opacity: .65; cursor: wait; }
-        .result-section { margin-top: 52px; scroll-margin-top: 32px; }
-        .result-card { padding: clamp(22px, 4vw, 40px); }
-        .result-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 28px; }
-        .result-heading h2 { margin: 0; font-size: 30px; letter-spacing: -.03em; }
-        .sample-badge, .status-badge { display: inline-flex; align-items: center; min-height: 36px; padding: 7px 14px; border-radius: 999px; background: #fff1ef; color: #a21e23; font-size: 14px; font-weight: 700; }
-        .score-area { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; padding-bottom: 26px; border-bottom: 1px solid var(--litera-line); }
-        .score { color: var(--litera-red); font-size: clamp(48px, 8vw, 72px); font-weight: 800; line-height: 1; letter-spacing: -.06em; }
-        .score-label { margin-bottom: 8px; color: var(--litera-muted); font-size: 15px; }
-        .findings { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 36px; padding: 28px 0; }
-        .findings h3 { margin-bottom: 14px; font-size: 21px; }
-        .finding-list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
-        .finding-list li, .explanation { color: var(--litera-muted); font-size: 15px; line-height: 1.65; }
-        .recommendation { padding: 18px; border-radius: 18px; background: #f7f6f2; }
-        .recommendation strong { display: block; margin-bottom: 6px; font-size: 16px; }
-        .recommendation p { margin: 0; color: var(--litera-muted); font-size: 15px; line-height: 1.6; }
-        .share-button { margin-top: 22px; background: var(--litera-black); color: #fff; }
-        @media (max-width: 640px) {
-            .analyze-page { width: calc(100% - 32px); padding-top: 112px; }
-            .page-intro { font-size: 15px; }
-            .mode-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-            .mode-tab { padding-inline: 8px; }
-            .findings { grid-template-columns: 1fr; gap: 22px; }
-            .result-heading h2 { font-size: 26px; }
-            .analyze-submit, .share-button { width: 100%; }
+        .page { width: calc(100% - 40px); max-width: 1000px; margin: 0 auto; padding: 132px 0 88px; }
+        h1, h2, h3, p { margin-top: 0; }
+        h1 { margin-bottom: 10px; font-size: clamp(30px, 4vw, 38px); line-height: 1.2; letter-spacing: -.035em; }
+        h2 { margin-bottom: 16px; font-size: clamp(21px, 2.5vw, 25px); line-height: 1.3; letter-spacing: -.02em; }
+        h3 { margin-bottom: 10px; font-size: 18px; }
+        p { font-size: 15px; line-height: 1.7; }
+        .muted { color: var(--litera-muted); }
+        .content-header { margin-bottom: 26px; }
+        .eyebrow, .tech-label { color: var(--litera-muted); font-size: 12px; font-weight: 600; letter-spacing: .045em; }
+        .eyebrow { display: inline-block; margin-bottom: 10px; }
+        .metadata { margin: 0; font-size: 14px; }
+        .journey { display: grid; gap: 18px; }
+        .card { padding: clamp(22px, 3.5vw, 34px); border: 1px solid var(--litera-line); border-radius: 26px; background: #fff; box-shadow: 0 8px 26px rgba(17,17,17,.035); }
+        .trust-card { display: grid; grid-template-columns: minmax(145px, .6fr) minmax(0, 1.4fr); gap: 12px 28px; align-items: center; }
+        .trust-title { margin-bottom: 8px; }
+        .confidence { color: var(--litera-red); font-size: clamp(52px, 8vw, 72px); font-weight: 800; line-height: 1; letter-spacing: -.06em; }
+        .status { display: inline-flex; margin-bottom: 12px; padding: 8px 13px; border-radius: 999px; background: #fff0ee; color: #982128; font-size: 13px; font-weight: 800; letter-spacing: .025em; }
+        .trust-summary { margin: 0; max-width: 600px; }
+        .two-up { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+        .category { margin: 0 0 10px; font-size: 22px; font-weight: 700; }
+        .result-title { margin-bottom: 18px; font-size: 14px; font-weight: 700; color: var(--litera-red); }
+        .age-list { display: grid; gap: 8px; margin: 18px 0 0; padding: 0; list-style: none; }
+        .age-list li { display: flex; justify-content: space-between; gap: 12px; padding: 11px 13px; border-radius: 12px; background: #f8f7f4; font-size: 14px; }
+        .age-list strong { text-align: right; }
+        .reference { display: flex; flex-wrap: wrap; gap: 5px 12px; align-items: baseline; }
+        .tech-label { display: block; margin-top: 18px; }
+        .fact-block { padding: 18px 20px; border-radius: 18px; background: #f8f7f4; }
+        .fact-block + .fact-block { margin-top: 12px; }
+        .fact-block p:last-child { margin-bottom: 0; }
+        .field-label { margin-bottom: 6px; color: var(--litera-muted); font-size: 13px; font-weight: 700; }
+        .claim { font-size: 17px; font-weight: 600; }
+        .indicators { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 18px; padding: 0; list-style: none; }
+        .indicators li { padding: 10px 14px; border: 1px solid var(--litera-line); border-radius: 999px; background: #faf9f7; font-size: 14px; }
+        .why-copy { max-width: 820px; margin-bottom: 0; }
+        .recommendation { border-color: rgba(223,37,43,.12); background: #fff7f5; }
+        .recommendation p { max-width: 820px; margin-bottom: 0; }
+        .human { margin: 8px 0 0; color: #4f4b46; font-size: 15px; text-align: center; }
+        .form-card { padding: clamp(22px, 4vw, 36px); }
+        .field { display: block; width: 100%; min-height: 58px; margin-top: 14px; padding: 14px 18px; border: 1px solid var(--litera-line); border-radius: 18px; background: #fff; color: var(--litera-black); font: inherit; font-size: 16px; }
+        .button { display: inline-flex; min-height: 50px; align-items: center; justify-content: center; margin-top: 18px; padding: 12px 24px; border: 0; border-radius: 999px; background: var(--litera-red); color: white; font: inherit; font-size: 16px; font-weight: 750; cursor: pointer; }
+        .button:disabled { opacity: .7; cursor: wait; }
+        .privacy, .error, .progress { margin: 12px 0 0; font-size: 13px; }
+        .error { color: #a21e23; }
+        .progress { color: var(--litera-muted); }
+        [hidden] { display: none !important; }
+        @media (max-width: 680px) {
+            .page { width: calc(100% - 32px); padding-top: 112px; }
+            .trust-card { grid-template-columns: 1fr; gap: 14px; }
+            .two-up { grid-template-columns: 1fr; }
+            .indicators { gap: 8px; }
+            .indicators li { font-size: 13px; }
         }
         @media (max-width: 1023px) { body { padding-bottom: 82px; } }
     </style>
 </head>
-
 <body>
     <x-litera-navbar active="analyze" />
+    <main class="page">
+        @if ($analysis)
+            @php
+                $isIndonesian = app()->isLocale('id');
+                $intentLabels = ['Edukatif' => 'Educational', 'Persuasif' => 'Persuasive', 'Provokatif' => 'Provocative', 'Komersial' => 'Commercial'];
+                $statusLabel = $analysis->fact_status === 'DUKUNGAN SUMBER TERSEDIA'
+                    ? ($isIndonesian ? $analysis->fact_status : 'SOURCE SUPPORT INDICATED')
+                    : ($isIndonesian ? $analysis->fact_status : 'NEEDS REVIEW');
+                $mainClaims = [
+                    'Edukatif' => 'The content explains ways to recognize unverified information on social media.',
+                    'Persuasif' => 'Drinking lemon water every morning is guaranteed to cleanse all toxins from the body.',
+                    'Provokatif' => 'Lemon water every morning removes toxins, and anyone who questions it does not care about your health.',
+                    'Komersial' => 'This product is guaranteed to make skin look brighter in three days.',
+                ];
+                $intentDescriptions = [
+                    'Edukatif' => 'The content explains ways to recognize information instead of encouraging a purchase or action.',
+                    'Persuasif' => 'The content uses language that encourages readers to accept a claim without enough supporting basis.',
+                    'Provokatif' => 'A forceful health claim is paired with distrustful wording, encouraging an emotional response before readers check its evidence and sources.',
+                    'Komersial' => 'The content uses promotional wording and confident benefit claims to encourage a purchase.',
+                ];
+                $explanations = [
+                    'Edukatif' => 'The content focuses on explanations and steps for recognizing information, rather than encouraging users to buy or follow an action.',
+                    'Persuasif' => "The word “guaranteed” makes the claim sound certain, while no source is shown to support it.",
+                    'Provokatif' => 'A forceful health claim is paired with distrustful wording, encouraging an emotional response before readers check its evidence and sources.',
+                    'Komersial' => 'Promotional language and highly confident benefit claims are used to encourage a purchase.',
+                ];
+                $recommendations = [
+                    'Edukatif' => 'Use this information as an initial guide and check the original sources.',
+                    'Persuasif' => 'Do not share this content right away. Check the original source and supporting evidence first.',
+                    'Provokatif' => 'Check the full context and sources before drawing a conclusion.',
+                    'Komersial' => 'Check evidence of benefits, the source of the claim, and product details before buying.',
+                ];
+                $indicatorLabels = [
+                    'Bahasa informatif' => 'Informative language',
+                    'Penjelasan berbasis langkah' => 'Step-by-step explanation',
+                    'Tidak ditemukan ajakan berlebihan' => 'No excessive call to action',
+                    'Diksi emosional' => 'Emotional wording',
+                    'Klaim tanpa sumber' => 'Claim without a source',
+                    'Generalisasi berlebihan' => 'Overgeneralization',
+                    'Bahasa emosional' => 'Emotional language',
+                    'Framing berlebihan' => 'Exaggerated framing',
+                    'Ajakan membentuk reaksi' => 'Prompts a reaction',
+                    'Bahasa promosi' => 'Promotional language',
+                    'Klaim manfaat sangat pasti' => 'Highly certain benefit claim',
+                    'Ajakan membeli' => 'Encourages a purchase',
+                ];
+            @endphp
 
-    <main class="analyze-page">
-        <h1>{{ app()->isLocale('id') ? 'Analisis Konten' : 'Analyze Content' }}</h1>
-        <p class="page-intro">{{ app()->isLocale('id') ? 'Periksa informasi sebelum percaya atau membagikannya.' : 'Check information before you trust or share it.' }}</p>
+            @php
+                $contentTypeLabels = [
+                    'Artikel / Media Sosial' => 'Article / Social Media',
+                    'Video / Media Sosial' => 'Video / Social Media',
+                    'Unggahan / Media Sosial' => 'Social Media Post',
+                    'Konten Promosi / Media Sosial' => 'Promotional Content / Social Media',
+                ];
+            @endphp
+            <header class="content-header">
+                <p class="result-title">{{ $isIndonesian ? 'Hasil Analisis' : 'Analysis Results' }}</p>
+                <h1>{{ $analysis->title }}</h1>
+                <p class="metadata muted">{{ $analysis->source }} · {{ $isIndonesian ? $analysis->content_type : ($contentTypeLabels[$analysis->content_type] ?? $analysis->content_type) }} · {{ $analysis->analyzed_at->format('d M Y') }}</p>
+            </header>
 
-        <section class="input-card" aria-label="{{ app()->isLocale('id') ? 'Masukkan konten' : 'Enter content' }}">
-            <div class="mode-tabs" role="group" aria-label="{{ app()->isLocale('id') ? 'Jenis konten' : 'Content type' }}">
-                @foreach (['text' => app()->isLocale('id') ? 'Teks' : 'Text', 'video' => 'Video', 'audio' => 'Audio'] as $mode => $label)
-                    <button class="mode-tab" type="button" aria-pressed="{{ request('type', 'text') === $mode || ($mode === 'text' && request('type') === 'link') ? 'true' : 'false' }}" data-mode="{{ $mode }}">{{ $label }}</button>
-                @endforeach
-            </div>
-
-            <label class="sr-only" for="contentLink">{{ app()->isLocale('id') ? 'Teks atau tautan konten' : 'Text or content link' }}</label>
-            <textarea id="contentLink" class="content-input" placeholder="{{ app()->isLocale('id') ? 'Tempel tautan atau masukkan konten' : 'Paste a link or enter content' }}">{{ request('content') }}</textarea>
-            <button id="analyzeButton" class="analyze-submit" type="button">{{ app()->isLocale('id') ? 'Analisis Konten' : 'Analyze Content' }}</button>
-        </section>
-
-        <section id="analysis-result" class="result-section" aria-labelledby="resultTitle" hidden>
-            <div class="result-card">
-                <div class="result-heading">
-                    <h2 id="resultTitle">{{ app()->isLocale('id') ? 'Hasil Analisis' : 'Analysis Result' }}</h2>
-                    <span class="sample-badge">{{ app()->isLocale('id') ? 'Hasil contoh' : 'Sample result' }}</span>
-                </div>
-
-                <div class="score-area">
-                    <div class="score">78%</div>
+            <div class="journey">
+                <section class="card trust-card" aria-labelledby="trust-title">
                     <div>
-                        <div class="score-label">{{ app()->isLocale('id') ? 'Kepercayaan informasi' : 'Information trust' }}</div>
-                        <span class="status-badge">{{ app()->isLocale('id') ? 'Perlu ditinjau' : 'Needs review' }}</span>
+                        <h2 id="trust-title" class="trust-title">{{ $isIndonesian ? 'Tingkat keyakinan fakta' : 'Fact confidence' }}</h2>
+                        <div class="confidence">{{ $analysis->fact_confidence }}%</div>
                     </div>
-                </div>
-
-                <div class="findings">
                     <div>
-                        <h3>{{ app()->isLocale('id') ? 'Yang kami temukan' : 'What we found' }}</h3>
-                        <ul class="finding-list">
-                            <li>✓ {{ app()->isLocale('id') ? 'Klaim utama ditemukan' : 'A main claim was found' }}</li>
-                            <li>✓ {{ app()->isLocale('id') ? 'Sumber pendukung perlu diperiksa' : 'Supporting sources need checking' }}</li>
-                            <li>✓ {{ app()->isLocale('id') ? 'Ada bahasa yang meyakinkan pembaca' : 'Some wording is persuasive' }}</li>
+                        <span class="status">{{ $statusLabel }}</span>
+                        <p class="trust-summary">{{ $isIndonesian
+                            ? ($analysis->fact_status === 'DUKUNGAN SUMBER TERSEDIA' ? 'Sejumlah rujukan mendukung informasi ini. Tetap periksa sumber utama dan konteksnya.' : 'Dukungan sumber yang ditampilkan belum cukup untuk memastikan klaim ini.')
+                            : ($analysis->fact_status === 'DUKUNGAN SUMBER TERSEDIA' ? 'Some references support this information. Check the original sources and context as well.' : 'The displayed source support is not sufficient to confirm this claim.') }}</p>
+                    </div>
+                </section>
+
+                <div class="two-up">
+                    <section class="card" aria-labelledby="intent-title">
+                        <h2 id="intent-title">{{ $isIndonesian ? 'Maksud konten' : 'What is the content trying to do?' }}</h2>
+                        <p class="category">{{ $isIndonesian ? $analysis->intent : $intentLabels[$analysis->intent] }}</p>
+                        <p>{{ $isIndonesian
+                            ? ($analysis->intent === 'Persuasif' ? 'Konten menggunakan bahasa yang mendorong pembaca untuk menerima klaim tanpa memberikan dasar yang cukup.' : $analysis->explanation)
+                            : $intentDescriptions[$analysis->intent] }}</p>
+                        <span class="tech-label">IntentScope</span>
+                    </section>
+                    <section class="card" aria-labelledby="age-title">
+                        <h2 id="age-title">{{ $isIndonesian ? 'Kelayakan usia' : 'Age suitability' }}</h2>
+                        <ul class="age-list">
+                            @foreach ($analysis->age_suitability as $age)
+                                <li><span>{{ $age['band'] }}</span><strong>{{ $isIndonesian ? $age['status'] : (['Sesuai' => 'Suitable', 'Tidak disarankan' => 'Not recommended', 'Perlu pertimbangan' => 'Consider guidance'][$age['status']] ?? $age['status']) }}</strong></li>
+                            @endforeach
                         </ul>
-                    </div>
-                    <div>
-                        <h3>{{ app()->isLocale('id') ? 'Kenapa?' : 'Why?' }}</h3>
-                        <p class="explanation">{{ app()->isLocale('id') ? 'Klaimnya luas, tetapi sumber yang mendukung belum cukup jelas.' : 'The claim is broad, but its supporting sources are not yet clear.' }}</p>
-                    </div>
+                        <p class="privacy muted">{{ $isIndonesian ? 'Rekomendasi berdasarkan karakteristik bahasa dan tahap perkembangan.' : 'Recommendations reflect language and developmental considerations.' }}</p>
+                        <span class="tech-label">IntentScope</span>
+                    </section>
                 </div>
 
-                <div class="recommendation">
-                    <strong>{{ app()->isLocale('id') ? 'Rekomendasi' : 'Recommendation' }}</strong>
-                    <p>{{ app()->isLocale('id') ? 'Cari sumber lain yang tepercaya sebelum membagikan informasi ini.' : 'Check another trusted source before sharing this information.' }}</p>
-                </div>
+                <section class="card" aria-labelledby="facts-title">
+                    <h2 id="facts-title">{{ $isIndonesian ? 'Fakta & sumber' : 'Facts & sources' }}</h2>
+                    <div class="fact-block">
+                        <p class="field-label">{{ $isIndonesian ? 'Klaim utama' : 'Main claim' }}</p>
+                        <p class="claim">{{ $isIndonesian ? $analysis->main_claim : $mainClaims[$analysis->intent] }}</p>
+                    </div>
+                    <div class="fact-block">
+                        <p class="field-label">{{ $isIndonesian ? 'Status' : 'Status' }}</p>
+                        <p>{{ $isIndonesian
+                            ? ($analysis->fact_status === 'DUKUNGAN SUMBER TERSEDIA' ? 'Rujukan yang tercantum memberi konteks untuk peninjauan klaim; periksa dokumen sumber secara langsung.' : 'Informasi ini masih memerlukan pemeriksaan sumber dan bukti pendukung.')
+                            : ($analysis->fact_status === 'DUKUNGAN SUMBER TERSEDIA' ? 'The listed references provide context for reviewing this claim; consult source documents directly.' : 'This information still needs source and evidence review.') }}</p>
+                    </div>
+                    <div class="fact-block">
+                        <p class="field-label">{{ $isIndonesian ? 'Rujukan' : 'References' }}</p>
+                        @foreach ($analysis->source_references as $reference)
+                            <p class="reference"><strong>{{ $reference['name'] }}</strong><span>{{ $reference['title'] }}</span><span>{{ $reference['reference'] }}</span></p>
+                        @endforeach
+                    </div>
+                    <span class="tech-label">FactLens</span>
+                </section>
 
-                <button class="share-button" id="shareResult" type="button">{{ app()->isLocale('id') ? 'Bagikan Hasil' : 'Share Result' }}</button>
+                <section class="card" aria-labelledby="reason-title">
+                    <h2 id="reason-title">{{ $isIndonesian ? 'Kenapa hasilnya seperti ini?' : 'Why this result?' }}</h2>
+                    <ul class="indicators">
+                        @foreach ($analysis->language_indicators as $indicator)
+                            <li>{{ $isIndonesian ? $indicator : ($indicatorLabels[$indicator] ?? $indicator) }}</li>
+                        @endforeach
+                    </ul>
+                    <p class="why-copy">{{ $isIndonesian ? $analysis->explanation : $explanations[$analysis->intent] }}</p>
+                    <span class="tech-label">LiteraReason</span>
+                </section>
+
+                <section class="card recommendation" aria-labelledby="recommendation-title">
+                    <h2 id="recommendation-title">{{ $isIndonesian ? 'Rekomendasi' : 'Recommendation' }}</h2>
+                    <p>{{ $isIndonesian ? $analysis->recommendation : $recommendations[$analysis->intent] }}</p>
+                </section>
+
+                <p class="human">{{ $isIndonesian ? 'AI membantu kamu memahami. Keputusan akhir tetap di tangan pengguna.' : 'AI helps you understand. The final decision remains with the user.' }}</p>
             </div>
-        </section>
+        @else
+            <h1>{{ app()->isLocale('id') ? 'Analisis Konten' : 'Analyze Content' }}</h1>
+            <p class="muted">{{ app()->isLocale('id') ? 'Tempel satu tautan untuk memahami klaim, sumber, dan maksudnya.' : 'Paste one link to understand its claims, sources, and intent.' }}</p>
+            <form class="card form-card" id="analysisForm" method="POST" action="{{ route('analyze.store') }}">
+                @csrf
+                <label for="url"><strong>{{ app()->isLocale('id') ? 'Tautan konten' : 'Content link' }}</strong></label>
+                <input class="field" id="url" name="url" type="url" required maxlength="2048" value="{{ old('url') }}" placeholder="https://" autocomplete="url">
+                @error('url') <p class="error">{{ $message }}</p> @enderror
+                @if (session('demo_message')) <p class="error" role="alert">{{ session('demo_message') }}</p> @endif
+                <button class="button" id="analyzeButton" type="submit">{{ app()->isLocale('id') ? 'Analisis Konten' : 'Analyze Content' }}</button>
+                <p class="progress" id="analysisProgress" role="status" hidden>{{ app()->isLocale('id') ? 'Menganalisis konten…' : 'Analyzing content…' }}</p>
+            </form>
+        @endif
     </main>
-
     <x-litera-footer />
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const tabs = Array.from(document.querySelectorAll('[data-mode]'));
-            const input = document.getElementById('contentLink');
-            const button = document.getElementById('analyzeButton');
-            const result = document.getElementById('analysis-result');
-            const shareButton = document.getElementById('shareResult');
-            const isIndonesian = document.documentElement.lang === 'id';
-            const placeholders = {
-                text: isIndonesian ? 'Tempel tautan atau masukkan konten' : 'Paste a link or enter content',
-                video: isIndonesian ? 'Tempel tautan video di sini' : 'Paste a video link here',
-                audio: isIndonesian ? 'Tempel tautan audio di sini' : 'Paste an audio link here',
-            };
-            const requestedMode = new URLSearchParams(window.location.search).get('type');
-            const initialMode = ['video', 'audio'].includes(requestedMode) ? requestedMode : 'text';
-            const storedContent = sessionStorage.getItem('litera-analysis-content');
-
-            if (storedContent) {
-                if (!input.value) {
-                    input.value = storedContent;
-                }
-
-                sessionStorage.removeItem('litera-analysis-content');
-            }
-
-            tabs.forEach(function (tab) {
-                tab.setAttribute('aria-pressed', tab.dataset.mode === initialMode ? 'true' : 'false');
-            });
-            input.placeholder = placeholders[initialMode];
-
-            tabs.forEach(function (tab) {
-                tab.addEventListener('click', function () {
-                    tabs.forEach(function (item) {
-                        item.setAttribute('aria-pressed', item === tab ? 'true' : 'false');
-                    });
-                    input.placeholder = placeholders[tab.dataset.mode];
-                });
-            });
-
-            button.addEventListener('click', function () {
-                if (!input.value.trim()) {
-                    input.focus();
-                    return;
-                }
-
+    @if (! $analysis)
+        <script>
+            document.getElementById('analysisForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                const form = this;
+                const button = document.getElementById('analyzeButton');
+                const progress = document.getElementById('analysisProgress');
                 button.disabled = true;
-                button.textContent = isIndonesian ? 'Menyiapkan hasil…' : 'Preparing result…';
-
+                progress.hidden = false;
                 window.setTimeout(function () {
-                    button.disabled = false;
-                    button.textContent = isIndonesian ? 'Analisis Konten' : 'Analyze Content';
-                    result.hidden = false;
-                    result.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 500);
+                    form.submit();
+                }, 550);
             });
-
-            shareButton.addEventListener('click', async function () {
-                const shareData = {
-                    title: isIndonesian ? 'Hasil contoh LITERA' : 'LITERA sample result',
-                    text: isIndonesian ? 'Informasi ini perlu ditinjau lebih lanjut.' : 'This information needs further review.',
-                    url: window.location.href,
-                };
-
-                if (navigator.share) {
-                    await navigator.share(shareData);
-                } else if (navigator.clipboard) {
-                    await navigator.clipboard.writeText(shareData.text + ' ' + shareData.url);
-                    shareButton.textContent = isIndonesian ? 'Tautan disalin' : 'Link copied';
-                }
-            });
-        });
-    </script>
+        </script>
+    @endif
 </body>
-
 </html>

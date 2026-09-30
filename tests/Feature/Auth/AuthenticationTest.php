@@ -6,7 +6,7 @@ use Laravel\Fortify\Features;
 test('login screen can be rendered', function () {
     $response = $this->get(route('login'));
 
-    $response->assertOk();
+    $response->assertOk()->assertDontSee('Demo email')->assertDontSee('demo@litera.test');
 });
 
 test('users can authenticate using the login screen', function () {
@@ -19,7 +19,7 @@ test('users can authenticate using the login screen', function () {
 
     $response
         ->assertSessionHasNoErrors()
-        ->assertRedirect(route('dashboard', absolute: false));
+        ->assertRedirect(route('analyze', absolute: false));
 
     $this->assertAuthenticated();
 });
@@ -35,6 +35,17 @@ test('users can not authenticate with invalid password', function () {
     $response->assertSessionHasErrorsIn('email');
 
     $this->assertGuest();
+});
+
+test('users with a stale dashboard intended URL land on analyze after login', function () {
+    $user = User::factory()->create();
+
+    $this->withSession(['url.intended' => route('dashboard')])
+        ->post(route('login.store'), [
+            'email' => $user->email,
+            'password' => 'password',
+        ])
+        ->assertRedirect(route('analyze', absolute: false));
 });
 
 test('users with two factor enabled are redirected to two factor challenge', function () {

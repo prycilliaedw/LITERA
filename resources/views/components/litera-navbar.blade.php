@@ -163,6 +163,13 @@
                         {{ __('dashboard') }}
                     </a>
 
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="px-1 text-xs font-medium text-black/65 hover:text-black sm:px-2 sm:text-sm">
+                            {{ app()->isLocale('id') ? 'Keluar' : 'Log out' }}
+                        </button>
+                    </form>
+
                 @endauth
 
             </div>
