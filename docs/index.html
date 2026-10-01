@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f6f2">
+    <meta name="description" content="LITERA membantu memahami klaim, sumber, maksud, dan bahasa dalam konten sebelum mempercayai atau membagikannya.">
+    <title>LITERA — Pahami sebelum percaya</title>
+    <link rel="icon" href="assets/logo_litera.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="#home" data-route="home" aria-label="LITERA — Beranda">
+            <img src="assets/logo_litera.png" alt="LITERA" width="142" height="48">
+            <span class="brand-copy"><strong>LITERA</strong><span>Understand before you trust.</span></span>
+        </a>
+
+        <nav class="desktop-nav" aria-label="Navigasi utama">
+            <a href="#home" data-route="home" data-nav="home">Beranda</a>
+            <a href="#analyze" data-route="analyze" data-nav="analyze">Analisis</a>
+            <a href="#history" data-route="history" data-nav="history">Jejak Litera</a>
+            <a href="#about" data-route="about" data-nav="about">Tentang</a>
+        </nav>
+
+        <div class="header-actions">
+            <div class="language-switch" role="group" aria-label="Pilih bahasa">
+                <button type="button" data-language="en" aria-pressed="false">EN</button>
+                <button type="button" data-language="id" aria-pressed="true">ID</button>
+            </div>
+            <a class="button button-small button-light" href="#login" data-route="login" data-login-link>Masuk</a>
+            <button class="text-button" type="button" data-logout-open hidden>Keluar</button>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="page-view home-view" data-view="home" aria-labelledby="home-title">
+            <div class="hero-shell">
+                <div class="hero-copy">
+                    <p class="eyebrow" data-copy="homeEyebrow">Baca lebih jernih. Pilih dengan sadar.</p>
+                    <h1 id="home-title" data-copy="homeTitle">Pahami sebelum percaya.</h1>
+                    <p class="hero-description" data-copy="homeDescription">Periksa informasi sebelum percaya atau membagikannya. LITERA membantu kamu memahami klaim, sumber, dan maksud konten.</p>
+                    <div class="hero-actions">
+                        <a class="button" href="#analyze" data-route="analyze"><span data-copy="analyzeContent">Analisis Konten</span><span aria-hidden="true">↗</span></a>
+                        <a class="quiet-link" href="#about" data-route="about"><span data-copy="howItWorks">Lihat cara kerjanya</span><span aria-hidden="true">→</span></a>
+                    </div>
+                    <div class="hero-note"><span class="status-dot" aria-hidden="true"></span><span data-copy="humanNote">AI membantu kamu memahami. Keputusan akhir tetap di tanganmu.</span></div>
+                </div>
+                <div class="hero-visual" aria-label="Kolase ilustrasi LITERA">
+                    <div class="visual-glow"></div>
+                    <img src="assets/litera-hero-collage.png" alt="Ilustrasi kolase LITERA" width="920" height="720">
+                    <div class="floating-note"><span class="note-mark">L</span><span><strong data-copy="clearContext">Konteks yang lebih jelas</strong><small data-copy="forBetterChoices">Untuk keputusan yang lebih baik</small></span></div>
+                </div>
+            </div>
+            <div class="home-pillars">
+                <div><span class="pillar-index">01</span><strong>FactLens</strong><span data-copy="pillarFact">Klaim, keyakinan, dan rujukan</span></div>
+                <div><span class="pillar-index">02</span><strong>IntentScope</strong><span data-copy="pillarIntent">Maksud konten dan kesesuaian usia</span></div>
+                <div><span class="pillar-index">03</span><strong>LiteraReason</strong><span data-copy="pillarReason">Indikator bahasa dan penjelasan</span></div>
+            </div>
+        </section>
+
+        <section class="page-view login-view" data-view="login" aria-labelledby="login-title" hidden>
+            <div class="login-art" aria-hidden="true"></div>
+            <div class="login-card">
+                <a class="login-logo" href="#home" data-route="home" aria-label="LITERA — Beranda"><img src="assets/logo_litera.png" alt="LITERA" width="142" height="48"></a>
+                <p class="eyebrow centered" data-copy="welcomeBack">Selamat datang kembali</p>
+                <h1 id="login-title" data-copy="loginTitle">Masuk ke akunmu</h1>
+                <p class="login-description" data-copy="loginDescription">Masukkan email dan kata sandi untuk melanjutkan.</p>
+                <form id="login-form" class="form-stack">
+                    <label for="email" data-copy="emailLabel">Alamat email</label>
+                    <input id="email" name="email" type="email" autocomplete="username" placeholder="email@example.com" required>
+                    <div class="password-label"><label for="password" data-copy="passwordLabel">Kata sandi</label></div>
+                    <div class="password-wrap">
+                        <input id="password" name="password" type="password" autocomplete="current-password" required>
+                        <button class="password-toggle" type="button" aria-label="Tampilkan kata sandi" aria-pressed="false" data-password-toggle><span aria-hidden="true">◉</span></button>
+                    </div>
+                    <p class="form-error" id="login-error" role="alert" hidden></p>
+                    <button class="button button-full" type="submit"><span data-copy="loginButton">Masuk</span><span aria-hidden="true">→</span></button>
+                </form>
+                <p class="login-footnote"><span data-copy="noAccount">Belum punya akun?</span> <a href="#about" data-route="about" data-copy="learnAbout">Kenali LITERA</a></p>
+            </div>
+        </section>
+
+        <section class="page-view analyze-view content-width" data-view="analyze" aria-labelledby="analyze-title" hidden>
+            <div class="page-heading">
+                <p class="eyebrow" data-copy="oneLinkCheck">ONE-LINK CHECK</p>
+                <h1 id="analyze-title" data-copy="analyzeTitle">Analisis Konten</h1>
+                <p data-copy="analyzeDescription">Tempel satu tautan untuk memahami klaim, sumber, dan maksudnya.</p>
+            </div>
+            <form class="panel analysis-form" id="analysis-form">
+                <label for="content-url" data-copy="contentLink">Tautan konten</label>
+                <div class="url-field"><span aria-hidden="true">↗</span><input id="content-url" name="url" type="url" inputmode="url" placeholder="https://" required maxlength="2048" autocomplete="url"></div>
+                <p class="field-hint" data-copy="urlHint">Tempel tautan yang ingin kamu tinjau.</p>
+                <p class="form-error" id="analysis-error" role="alert" hidden></p>
+                <button class="button" type="submit"><span data-copy="analyzeButton">Analisis Konten</span><span aria-hidden="true">→</span></button>
+                <p class="privacy-note"><span class="lock-icon" aria-hidden="true">◇</span><span data-copy="staticNotice">Prototipe statis: analisis contoh ditampilkan di browser ini.</span></p>
+            </form>
+            <div class="process-row" aria-label="Alur analisis">
+                <span><b>01</b><span data-copy="stepInput">Tautan</span></span><i aria-hidden="true"></i>
+                <span><b>02</b><span data-copy="stepReview">Tinjauan</span></span><i aria-hidden="true"></i>
+                <span><b>03</b><span data-copy="stepContext">Konteks</span></span>
+            </div>
+        </section>
+
+        <section class="page-view result-view content-width" data-view="result" aria-labelledby="result-page-title" hidden>
+            <div id="result-content"></div>
+        </section>
+
+        <section class="page-view history-view content-width" data-view="history" aria-labelledby="history-title" hidden>
+            <div class="page-heading history-heading">
+                <p class="eyebrow" data-copy="yourTrail">YOUR LITERACY TRAIL</p>
+                <h1 id="history-title" data-copy="historyTitle">Jejak Litera</h1>
+                <p data-copy="historyDescription">Lihat kembali konten yang telah kamu periksa.</p>
+            </div>
+            <div class="history-tools"><span id="history-count">0 analisis</span><a href="#analyze" data-route="analyze" class="quiet-link"><span data-copy="newAnalysis">Analisis baru</span><span aria-hidden="true">+</span></a></div>
+            <div class="history-list" id="history-list"></div>
+        </section>
+
+        <section class="page-view about-view content-width" data-view="about" aria-labelledby="about-title" hidden>
+            <section class="about-hero panel">
+                <div>
+                    <p class="eyebrow" data-copy="aboutEyebrow">TENTANG LITERA</p>
+                    <h1 id="about-title" data-copy="aboutTitle">Pahami informasi dengan lebih utuh.</h1>
+                    <p data-copy="aboutDescription">LITERA membantu kamu memahami klaim, sumber, maksud, dan bahasa dalam konten sebelum mempercayai atau membagikannya.</p>
+                    <a class="button" href="#analyze" data-route="analyze"><span data-copy="analyzeContent">Analisis Konten</span><span aria-hidden="true">→</span></a>
+                </div>
+                <div class="decision-card"><span data-copy="content">Konten</span><span aria-hidden="true">↓</span><span data-copy="explanation">Penjelasan</span><span aria-hidden="true">↓</span><strong data-copy="yourDecision">Keputusanmu</strong></div>
+            </section>
+            <section class="about-section" id="features">
+                <div class="section-heading"><p class="eyebrow" data-copy="fourParts">FOUR CONNECTED PARTS</p><h2 data-copy="featuresTitle">Empat bagian yang saling terhubung</h2><p data-copy="featuresDescription">Setiap bagian memberi sudut pandang berbeda agar kamu dapat menilai informasi dengan lebih utuh.</p></div>
+                <div class="feature-grid">
+                    <article class="feature-card"><span>01</span><h3>FactLens</h3><p data-copy="featureFact">Menguraikan klaim, tingkat keyakinan, dan rujukan yang relevan.</p></article>
+                    <article class="feature-card"><span>02</span><h3>IntentScope</h3><p data-copy="featureIntent">Membaca maksud konten dan kesesuaiannya berdasarkan usia.</p></article>
+                    <article class="feature-card"><span>03</span><h3>LiteraReason</h3><p data-copy="featureReason">Menjelaskan indikator bahasa yang memengaruhi pembaca.</p></article>
+                    <article class="feature-card"><span>04</span><h3 data-copy="humanDecision">Keputusan manusia</h3><p data-copy="featureHuman">Pengguna mempertimbangkan hasil dan menentukan langkahnya sendiri.</p></article>
+                </div>
+            </section>
+            <section class="about-section how-section" id="how-it-works">
+                <div class="section-heading"><p class="eyebrow" data-copy="howLabel">HOW IT WORKS</p><h2 data-copy="howTitle">Cara kerjanya</h2><p data-copy="howDescription">Alur satu tautan menghubungkan pemeriksaan teknis dengan keputusan pengguna.</p></div>
+                <div class="steps-grid">
+                    <article><span>01</span><h3>One-Link Check</h3><p data-copy="flowOne">Mulai dengan satu tautan konten.</p></article>
+                    <article><span>02</span><h3 data-copy="flowTwoTitle">Ekstraksi & Whisper</h3><p data-copy="flowTwo">Teks dan ucapan yang relevan diekstrak untuk ditinjau.</p></article>
+                    <article><span>03</span><h3>FactLens + IntentScope</h3><p data-copy="flowThree">Klaim, sumber, maksud, dan usia ditelaah.</p></article>
+                    <article><span>04</span><h3>LiteraReason</h3><p data-copy="flowFour">Hasil dijelaskan agar pengguna dapat mengambil keputusan sendiri.</p></article>
+                </div>
+            </section>
+            <section class="ethics-panel">
+                <p class="eyebrow" data-copy="ethicsLabel">OUR APPROACH</p><h2 data-copy="ethicsTitle">AI membantu. Kamu yang memutuskan.</h2>
+                <p data-copy="ethicsDescription">Gunakan hasil LITERA sebagai bahan pertimbangan. Keputusan akhir tetap di tangan pengguna.</p>
+            </section>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-brand"><img src="assets/logo_litera.png" alt="LITERA" width="132" height="45"><p data-copy="footerDescription">Periksa informasi sebelum percaya atau membagikannya.</p><span>Understand before you trust.</span></div>
+        <div class="footer-links"><strong data-copy="explore">JELAJAHI</strong><a href="#analyze" data-route="analyze" data-copy="analyzeContent">Analisis Konten</a><a href="#history" data-route="history" data-copy="historyTitle">Jejak Litera</a><a href="#about" data-route="about" data-copy="aboutNav">Tentang</a></div>
+        <div class="footer-bottom"><span>© <span id="current-year"></span> LITERA</span><span data-copy="footerTagline">Pahami sebelum percaya.</span></div>
+    </footer>
+
+    <nav class="mobile-nav" aria-label="Navigasi seluler">
+        <a href="#home" data-route="home" data-nav="home"><span aria-hidden="true">⌂</span><small data-copy="homeNav">Beranda</small></a>
+        <a href="#analyze" data-route="analyze" data-nav="analyze"><span aria-hidden="true">⌕</span><small data-copy="analyzeNav">Analisis</small></a>
+        <a href="#history" data-route="history" data-nav="history"><span aria-hidden="true">◷</span><small data-copy="historyNav">Riwayat</small></a>
+        <a href="#about" data-route="about" data-nav="about"><span aria-hidden="true">ⓘ</span><small data-copy="aboutNav">Tentang</small></a>
+    </nav>
+
+    <dialog class="logout-dialog" id="logout-dialog" aria-labelledby="logout-title" aria-describedby="logout-description">
+        <div class="dialog-card"><span class="dialog-icon" aria-hidden="true">↗</span><h2 id="logout-title" data-copy="logoutTitle">Keluar dari akun?</h2><p id="logout-description" data-copy="logoutDescription">Apakah kamu yakin ingin keluar dari akun LITERA?</p><div class="dialog-actions"><button type="button" class="button button-light" data-logout-cancel data-copy="cancel">Batalkan</button><button type="button" class="button" data-logout-confirm data-copy="confirmLogout">Ya, Keluar</button></div></div>
+    </dialog>
+</body>
+</html>
