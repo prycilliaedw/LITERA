@@ -163,9 +163,9 @@
                         {{ __('dashboard') }}
                     </a>
 
-                    <form method="POST" action="{{ route('logout') }}">
+                    <form method="POST" action="{{ route('logout') }}" data-logout-form>
                         @csrf
-                        <button type="submit" class="px-1 text-xs font-medium text-black/65 hover:text-black sm:px-2 sm:text-sm">
+                        <button type="button" data-logout-trigger aria-haspopup="dialog" aria-controls="logout-confirmation" class="px-1 text-xs font-medium text-black/65 hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#DF252B] sm:px-2 sm:text-sm">
                             {{ app()->isLocale('id') ? 'Keluar' : 'Log out' }}
                         </button>
                     </form>
@@ -179,6 +179,86 @@
     </div>
 
 </header>
+
+@auth
+    <dialog
+        id="logout-confirmation"
+        aria-labelledby="logout-confirmation-title"
+        aria-describedby="logout-confirmation-description"
+        class="litera-logout-dialog"
+        data-logout-dialog
+    >
+        <div class="litera-logout-dialog__content">
+            <h2 id="logout-confirmation-title">{{ __('logout_confirmation_title') }}</h2>
+            <p id="logout-confirmation-description">{{ __('logout_confirmation_message') }}</p>
+            <div class="litera-logout-dialog__actions">
+                <button type="button" data-logout-cancel class="litera-logout-dialog__cancel">
+                    {{ __('cancel') }}
+                </button>
+                <button type="button" data-logout-confirm class="litera-logout-dialog__confirm">
+                    {{ __('confirm_logout') }}
+                </button>
+            </div>
+        </div>
+    </dialog>
+
+    <style>
+        .litera-logout-dialog {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            max-width: none;
+            height: 100%;
+            max-height: 100%;
+            margin: 0;
+            padding: 16px;
+            place-items: center;
+            overflow-y: auto;
+            border: 0;
+            background: transparent;
+            color: #111;
+        }
+
+        .litera-logout-dialog[open] { display: grid; }
+        .litera-logout-dialog::backdrop { background: rgba(0, 0, 0, .35); }
+        .litera-logout-dialog__content {
+            box-sizing: border-box;
+            width: min(92vw, 480px);
+            padding: clamp(24px, 6vw, 36px);
+            border: 1px solid rgba(17, 17, 17, .12);
+            border-radius: 26px;
+            background: #f7f6f2;
+            box-shadow: 0 18px 60px rgba(17, 17, 17, .14);
+        }
+
+        .litera-logout-dialog h2 { margin: 0; font-size: clamp(21px, 5vw, 25px); font-weight: 750; line-height: 1.25; letter-spacing: -.025em; }
+        .litera-logout-dialog p { margin: 12px 0 26px; color: rgba(17, 17, 17, .68); font-size: 15px; line-height: 1.6; }
+        .litera-logout-dialog__actions { display: flex; justify-content: flex-end; gap: 10px; }
+        .litera-logout-dialog button { min-height: 46px; padding: 11px 18px; border: 1px solid rgba(17, 17, 17, .12); border-radius: 999px; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
+        .litera-logout-dialog button:focus-visible { outline: 3px solid rgba(223, 37, 43, .35); outline-offset: 3px; }
+        .litera-logout-dialog__cancel { background: #fff; color: #111; }
+        .litera-logout-dialog__confirm { border-color: #DF252B !important; background: #DF252B; color: #fff; }
+        @media (max-width: 420px) {
+            .litera-logout-dialog__actions { flex-direction: column-reverse; }
+            .litera-logout-dialog button { width: 100%; }
+        }
+    </style>
+
+    <script>
+        (() => {
+            const dialog = document.querySelector('[data-logout-dialog]');
+            const form = document.querySelector('[data-logout-form]');
+
+            if (!dialog || !form) {
+                return;
+            }
+
+            form.querySelector('[data-logout-trigger]')?.addEventListener('click', () => dialog.showModal());
+            dialog.querySelector('[data-logout-cancel]')?.addEventListener('click', () => dialog.close());
+            dialog.querySelector('[data-logout-confirm]')?.addEventListener('click', () => form.submit());
+        })();
+    </script>
+@endauth
 
 <style>
     .litera-mobile-nav {

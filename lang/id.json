@@ -6,6 +6,10 @@
     "get_started": "Mulai",
     "login": "Masuk",
     "dashboard": "Dashboard",
+    "logout_confirmation_title": "Keluar dari akun?",
+    "logout_confirmation_message": "Apakah kamu yakin ingin keluar dari akun LITERA?",
+    "cancel": "Batalkan",
+    "confirm_logout": "Ya, Keluar",
 
     "safer_digital_society": "Masyarakat Digital yang Lebih Aman",
 

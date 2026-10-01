@@ -6,6 +6,10 @@
     "get_started": "Get Started",
     "login": "Log in",
     "dashboard": "Dashboard",
+    "logout_confirmation_title": "Log out?",
+    "logout_confirmation_message": "Are you sure you want to log out of your LITERA account?",
+    "cancel": "Cancel",
+    "confirm_logout": "Yes, Log out",
 
     "safer_digital_society": "A Safer Digital Society",
 

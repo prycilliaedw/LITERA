@@ -9,32 +9,42 @@ test('login screen can be rendered', function () {
     $response->assertOk()
         ->assertDontSee('Demo email')
         ->assertDontSee('demo@litera.test')
-        ->assertSee('action="http://localhost:8000/login"', false);
+        ->assertSee('id="password"', false)
+        ->assertSee('type="password"', false)
+        ->assertSee('type="button"', false)
+        ->assertSee('aria-label="Tampilkan kata sandi"', false)
+        ->assertSee('x-on:click="showPassword = !showPassword"', false)
+        ->assertSee('x-bind:type="showPassword ? \'text\' : \'password\'"', false)
+        ->assertSee('Sembunyikan kata sandi', false)
+        ->assertSee('action="'.route('login.store').'"', false);
 });
 
 test('login form action uses the forwarded HTTPS scheme', function () {
+    $appUrl = parse_url(config('app.url'));
+    $httpsOrigin = 'https://'.$appUrl['host'].(isset($appUrl['port']) ? ':'.$appUrl['port'] : '');
+
     $response = $this->withHeaders([
         'X-Forwarded-Proto' => 'https',
     ])->get(route('login', absolute: false));
 
     $response->assertOk()
-        ->assertSee('action="https://localhost:8000/login"', false)
-        ->assertSee('href="https://localhost:8000/forgot-password"', false);
+        ->assertSee('action="'.$httpsOrigin.'/login"', false)
+        ->assertSee('href="'.$httpsOrigin.'/forgot-password"', false);
 
     $this->get('/forgot-password')
         ->assertOk()
-        ->assertSee('action="https://localhost:8000/forgot-password"', false);
+        ->assertSee('action="'.$httpsOrigin.'/forgot-password"', false);
 
     $this->get('/reset-password/test-token?email=demo%40litera.test')
         ->assertOk()
-        ->assertSee('action="https://localhost:8000/reset-password"', false);
+        ->assertSee('action="'.$httpsOrigin.'/reset-password"', false);
 
     $user = User::factory()->create();
 
     $this->actingAs($user)->get('/analyze')
         ->assertOk()
-        ->assertSee('action="https://localhost:8000/analyze"', false)
-        ->assertSee('action="https://localhost:8000/logout"', false);
+        ->assertSee('action="'.$httpsOrigin.'/analyze"', false)
+        ->assertSee('action="'.$httpsOrigin.'/logout"', false);
 
     $this->get('/history')->assertOk();
 });
@@ -70,11 +80,12 @@ test('users can not authenticate with invalid password', function () {
 test('users with a stale dashboard intended URL land on analyze after login', function () {
     $user = User::factory()->create();
 
-    $this->withSession(['url.intended' => route('dashboard')])
-        ->post(route('login.store'), [
-            'email' => $user->email,
-            'password' => 'password',
-        ])
+    $this->get(route('dashboard'))->assertRedirect(route('login'));
+
+    $this->post(route('login.store'), [
+        'email' => $user->email,
+        'password' => 'password',
+    ])
         ->assertRedirect(route('analyze', absolute: false));
 });
 

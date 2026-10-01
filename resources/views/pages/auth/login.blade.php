@@ -22,16 +22,32 @@
             />
 
             <!-- Password -->
-            <div class="relative">
+            <div class="relative" x-data="{ showPassword: false }">
                 <flux:input
+                    id="password"
                     name="password"
                     :label="__('Password')"
                     type="password"
+                    x-bind:type="showPassword ? 'text' : 'password'"
+                    class:input="pe-12"
                     required
                     autocomplete="current-password"
                     :placeholder="__('Password')"
-                    viewable
                 />
+
+                <button
+                    type="button"
+                    class="absolute end-2 top-[2.1rem] inline-flex size-9 items-center justify-center rounded-md text-zinc-500 transition hover:text-zinc-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 dark:text-zinc-400 dark:hover:text-white"
+                    aria-controls="password"
+                    aria-label="Tampilkan kata sandi"
+                    aria-pressed="false"
+                    x-on:click="showPassword = !showPassword"
+                    x-bind:aria-label="showPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'"
+                    x-bind:aria-pressed="showPassword.toString()"
+                >
+                    <flux:icon.eye data-password-show-icon x-show="!showPassword" aria-hidden="true" />
+                    <flux:icon.eye-slash data-password-hide-icon x-show="showPassword" aria-hidden="true" />
+                </button>
 
                 @if (Route::has('password.request'))
                     <flux:link class="absolute top-0 text-sm end-0" :href="route('password.request')" wire:navigate>
