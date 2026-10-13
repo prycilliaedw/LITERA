@@ -23,7 +23,8 @@ const copy = {
         emailLabel: 'Alamat email', passwordLabel: 'Kata sandi', loginButton: 'Masuk', noAccount: 'Belum punya akun?', learnAbout: 'Kenali LITERA',
         loginError: 'Email atau kata sandi tidak sesuai. Coba lagi.',
         oneLinkCheck: 'ONE-LINK CHECK', analyzeTitle: 'Analisis Konten', analyzeDescription: 'Tempel satu tautan untuk memahami klaim, sumber, dan maksudnya.',
-        contentLink: 'Tautan konten', urlHint: 'Tempel tautan yang ingin kamu tinjau.', staticNotice: 'Prototipe statis: analisis contoh ditampilkan di browser ini.',
+        contentLink: 'Tautan konten', urlHint: 'Tempel tautan yang ingin kamu tinjau.',
+        sampleLinksLabel: 'Contoh tautan untuk dianalisis', sampleEducational: 'Edukasi', samplePersuasive: 'Kesehatan', sampleCommercial: 'Promosi', sampleProvocative: 'Provokatif',
         analyzeButton: 'Analisis Konten', invalidUrl: 'Masukkan tautan lengkap yang dimulai dengan http:// atau https://.',
         stepInput: 'Tautan', stepReview: 'Tinjauan', stepContext: 'Konteks',
         yourTrail: 'JEJAK LITERASI PERSONAL', historyTitle: 'Jejak Litera', historyDescription: 'Jejak literasi personal. Lihat kembali konten yang telah kamu periksa.',
@@ -77,7 +78,8 @@ const copy = {
         emailLabel: 'Email address', passwordLabel: 'Password', loginButton: 'Log in', noAccount: 'New to LITERA?', learnAbout: 'Get to know LITERA',
         loginError: 'That email and password do not match. Please try again.',
         oneLinkCheck: 'ONE-LINK CHECK', analyzeTitle: 'Analyze Content', analyzeDescription: 'Paste one link to understand its claims, sources, and intent.',
-        contentLink: 'Content link', urlHint: 'Paste the link you would like to review.', staticNotice: 'Static prototype: a sample analysis is shown in this browser.',
+        contentLink: 'Content link', urlHint: 'Paste the link you would like to review.',
+        sampleLinksLabel: 'Example links to analyze', sampleEducational: 'Education', samplePersuasive: 'Health', sampleCommercial: 'Promotion', sampleProvocative: 'Provocative',
         analyzeButton: 'Analyze Content', invalidUrl: 'Enter a complete link starting with http:// or https://.',
         stepInput: 'Link', stepReview: 'Review', stepContext: 'Context',
         yourTrail: 'YOUR LITERACY TRAIL', historyTitle: 'Litera History', historyDescription: 'Your personal literacy trail. Review the content you have checked.',
@@ -298,6 +300,9 @@ function renderView(view = currentView()) {
     document.querySelectorAll('[data-logout-open]').forEach((button) => {
         button.hidden = !isAuthenticated;
     });
+    document.querySelectorAll('[data-start-link]').forEach((link) => {
+        link.hidden = isAuthenticated;
+    });
 
     if (view === 'history') {
         renderHistory();
@@ -461,6 +466,14 @@ function escapeHtml(value) {
 }
 
 document.addEventListener('click', (event) => {
+    const sampleLink = event.target.closest('[data-sample-url]');
+    if (sampleLink) {
+        const urlInput = document.querySelector('#analysis-form [name="url"]');
+        urlInput.value = sampleLink.dataset.sampleUrl;
+        urlInput.focus();
+        return;
+    }
+
     const analysisLink = event.target.closest('[data-open-analysis]');
     if (analysisLink) {
         selectedAnalysisId = analysisLink.dataset.openAnalysis;
