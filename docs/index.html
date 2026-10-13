@@ -14,14 +14,14 @@
     <header class="site-header">
         <a class="brand" href="#home" data-route="home" aria-label="LITERA — Beranda">
             <img src="assets/logo_litera.png" alt="LITERA" width="142" height="48">
-            <span class="brand-copy"><strong>LITERA</strong><span>Understand before you trust.</span></span>
+
         </a>
 
         <nav class="desktop-nav" aria-label="Navigasi utama">
-            <a href="#home" data-route="home" data-nav="home">Beranda</a>
-            <a href="#analyze" data-route="analyze" data-nav="analyze">Analisis</a>
-            <a href="#history" data-route="history" data-nav="history">Jejak Litera</a>
-            <a href="#about" data-route="about" data-nav="about">Tentang</a>
+            <a href="#home" data-route="home" data-nav="home" data-copy="homeNav">Beranda</a>
+            <a href="#analyze" data-route="analyze" data-nav="analyze" data-copy="analyzeNav">Analisis</a>
+            <a href="#history" data-route="history" data-nav="history" data-copy="historyNav">Riwayat</a>
+            <a href="#about" data-route="about" data-nav="about" data-copy="aboutNav">Tentang</a>
         </nav>
 
         <div class="header-actions">
@@ -29,7 +29,8 @@
                 <button type="button" data-language="en" aria-pressed="false">EN</button>
                 <button type="button" data-language="id" aria-pressed="true">ID</button>
             </div>
-            <a class="button button-small button-light" href="#login" data-route="login" data-login-link>Masuk</a>
+            <a class="text-button" href="#login" data-route="login" data-login-link>Masuk</a>
+            <a class="button button-small" href="#login" data-route="login" data-start-link data-copy="startButton">Mulai</a>
             <button class="text-button" type="button" data-logout-open hidden>Keluar</button>
         </div>
     </header>
@@ -140,9 +141,13 @@
     </main>
 
     <footer class="site-footer">
-        <div class="footer-brand"><img src="assets/logo_litera.png" alt="LITERA" width="132" height="45"><p data-copy="footerDescription">Periksa informasi sebelum percaya atau membagikannya.</p><span>Understand before you trust.</span></div>
-        <div class="footer-links"><strong data-copy="explore">JELAJAHI</strong><a href="#analyze" data-route="analyze" data-copy="analyzeContent">Analisis Konten</a><a href="#history" data-route="history" data-copy="historyTitle">Jejak Litera</a><a href="#about" data-route="about" data-copy="aboutNav">Tentang</a></div>
-        <div class="footer-bottom"><span>© <span id="current-year"></span> LITERA</span><span data-copy="footerTagline">Pahami sebelum percaya.</span></div>
+        <div class="footer-grid">
+            <div class="footer-brand"><img src="assets/logo_litera.png" alt="LITERA" width="145" height="49"><p data-copy="footerDescription">Periksa informasi sebelum percaya atau membagikannya.</p><span data-copy="footerTagline">Pahami sebelum percaya.</span></div>
+            <div class="footer-links"><strong data-copy="footerProduct">PRODUK</strong><a href="#analyze" data-route="analyze" data-copy="analyzeNav">Analisis</a><a href="#history" data-route="history" data-copy="historyNav">Riwayat</a><a href="#about" data-route="about" data-copy="aboutNav">Tentang</a></div>
+            <div class="footer-links"><strong data-copy="footerInformation">INFORMASI</strong><a href="#about" data-route="about" data-copy="footerFeatures">Fitur LITERA</a><a href="#about" data-route="about" data-copy="footerEthics">Etika &amp; Privasi</a><a href="#about" data-route="about" data-copy="aboutNav">Tentang</a></div>
+            <div class="footer-contact"><strong data-copy="footerContact">KONTAK</strong><p data-copy="contactDescription">Punya pertanyaan, masukan, atau ingin mengenal LITERA lebih jauh?</p><a href="#about" data-route="about" data-copy="contactLink">Kontak tim LITERA</a></div>
+        </div>
+        <div class="footer-bottom"><span>© <span id="current-year"></span> LITERA · <span data-copy="footerRights">Seluruh hak dilindungi.</span></span><span data-copy="footerTagline">Pahami sebelum percaya.</span></div>
     </footer>
 
     <nav class="mobile-nav" aria-label="Navigasi seluler">
