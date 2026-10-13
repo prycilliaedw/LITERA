@@ -332,6 +332,11 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
     .dialog-actions { flex-direction: column-reverse; }
     .dialog-actions .button { width: 100%; }
 }
+@media (max-width: 760px) {
+    #main-content .home-view .hero-actions { width: 100%; align-items: center !important; margin-inline: auto; }
+    #main-content .home-view .hero-actions > .button,
+    #main-content .home-view .hero-actions > .quiet-link { align-self: center !important; margin-inline: auto; }
+}
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
