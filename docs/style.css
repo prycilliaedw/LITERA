@@ -260,7 +260,8 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
     .hero-copy { padding: 31px 0 0; }
     .hero-copy h1 { max-width: 560px; font-size: clamp(44px, 12vw, 67px); }
     .hero-description { max-width: 520px; margin-top: 16px; font-size: 14px; }
-    .hero-actions { gap: 17px; margin-top: 22px; }
+    .hero-actions { width: 100%; align-items: center; gap: 17px; margin-top: 22px; }
+    .hero-actions > .button, .hero-actions > .quiet-link { align-self: center; }
     .hero-note { margin-top: 23px; font-size: 10px; }
     .hero-visual { min-height: 280px; margin-top: 0; }
     .hero-visual img { width: min(100%, 400px); max-height: 300px; }
@@ -325,7 +326,8 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
     .brand-copy span { display: none; }
     .header-actions { gap: 5px; }
     .button-small { padding: 0 10px; }
-    .hero-actions { align-items: center; flex-direction: column; gap: 13px; }
+    .hero-actions { width: 100%; align-items: center; flex-direction: column; gap: 13px; }
+    .hero-actions > .button, .hero-actions > .quiet-link { align-self: center; }
     .feature-grid { grid-template-columns: 1fr 1fr; }
     .dialog-actions { flex-direction: column-reverse; }
     .dialog-actions .button { width: 100%; }
