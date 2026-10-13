@@ -325,7 +325,7 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
     .brand-copy span { display: none; }
     .header-actions { gap: 5px; }
     .button-small { padding: 0 10px; }
-    .hero-actions { align-items: flex-start; flex-direction: column; gap: 13px; }
+    .hero-actions { align-items: center; flex-direction: column; gap: 13px; }
     .feature-grid { grid-template-columns: 1fr 1fr; }
     .dialog-actions { flex-direction: column-reverse; }
     .dialog-actions .button { width: 100%; }
