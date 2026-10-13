@@ -186,7 +186,7 @@ let locale = localeFromStorage === 'en' ? 'en' : 'id';
 let isAuthenticated = readStorage(STORAGE_KEYS.authenticated) === 'true';
 let selectedAnalysisId = null;
 
-const analysisUrlInput = document.querySelector('#analysis-form input[type="url"]');
+const analysisUrlInput = document.querySelector('#analysis-form input[name="url"]');
 analysisUrlInput.addEventListener('pointerdown', () => {
     viewportMeta.content = 'width=device-width, initial-scale=1, maximum-scale=1';
 });
