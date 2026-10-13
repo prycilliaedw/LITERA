@@ -179,10 +179,23 @@ const ageBands = ['<13', '13–15', '16–17', '18+'];
 const validViews = new Set(['home', 'login', 'analyze', 'result', 'history', 'about']);
 const viewElements = [...document.querySelectorAll('[data-view]')];
 const logoutDialog = document.querySelector('#logout-dialog');
+const viewportMeta = document.querySelector('meta[name="viewport"]');
+const defaultViewportContent = viewportMeta.content;
 const localeFromStorage = readStorage(STORAGE_KEYS.locale);
 let locale = localeFromStorage === 'en' ? 'en' : 'id';
 let isAuthenticated = readStorage(STORAGE_KEYS.authenticated) === 'true';
 let selectedAnalysisId = null;
+
+const analysisUrlInput = document.querySelector('#analysis-form input[type="url"]');
+analysisUrlInput.addEventListener('pointerdown', () => {
+    viewportMeta.content = 'width=device-width, initial-scale=1, maximum-scale=1';
+});
+analysisUrlInput.addEventListener('focus', () => {
+    viewportMeta.content = 'width=device-width, initial-scale=1, maximum-scale=1';
+});
+analysisUrlInput.addEventListener('blur', () => {
+    viewportMeta.content = defaultViewportContent;
+});
 
 function readStorage(key) {
     try {
