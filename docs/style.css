@@ -63,7 +63,7 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 .page-view { min-height: 68vh; animation: page-enter .25s ease both; }
 .page-view[hidden] { display: none !important; }
 @keyframes page-enter { from { opacity: .5; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-.home-view { display: grid; min-height: 100vh; min-height: 100svh; place-items: center; padding: 120px 24px 72px; background: linear-gradient(135deg, #fff 0%, #fff 28%, #ffe0dd 62%, #f5aaa5 100%); text-align: center; }
+.home-view { display: grid; min-height: 100vh; min-height: 100svh; place-items: center; padding: 120px 24px 72px; background-color: #f5aaa5; background-image: linear-gradient(120deg, #fff 0%, #fff5f3 30%, #ffd0cc 62%, #ef7772 100%); text-align: center; }
 .hero-shell { display: grid; width: min(900px, 100%); place-items: center; margin: 0 auto; }
 .hero-copy { width: 100%; text-align: center; }
 .hero-copy { position: relative; z-index: 1; padding: 28px 0; }
